@@ -48,6 +48,7 @@ Overloadable Operators
 %
 -
 -@
++@
 +
 /
 +=
@@ -72,6 +73,11 @@ Overloadable Operators
 |
 ^
 &
+~
+
+Already Overloaded Operators
+* - rest and spread on sets
+& - to_proc
 
 Non-overloadable Operators
 ||
@@ -82,7 +88,7 @@ and
 or
 not
 =
-~
+->
 .
 ..
 ...
@@ -101,4 +107,5 @@ ObjectSpace.define_finalizer
 Signal.trap
 ```
 
-ActiveSupport::Concern
+
+ActiveSupport::Concern and Module#included

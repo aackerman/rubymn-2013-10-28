@@ -1,5 +1,5 @@
 class Container
-  def ~(k)
+  def to_proc
     puts 'hello'
   end
 end
