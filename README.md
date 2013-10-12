@@ -1,13 +1,15 @@
+# Builtin Ruby Hooks
+
 ## Method-related hooks
 
 ```
 method_missing
 respond_to_missing?
 method_added
-singleton_method_added
 method_removed
-singleton_method_removed
 method_undefined
+singleton_method_added
+singleton_method_removed
 singleton_method_undefined
 ```
 
@@ -39,6 +41,8 @@ marshal_load
 coerce
 induced_from
 to_xxx
+
+Overloadable Operators
 *
 **
 %
@@ -46,24 +50,45 @@ to_xxx
 -@
 +
 /
-=
-==
++=
+-=
+*=
+/=
+**=
 =~
 !~
-!=
-===
-<
 <<
-<=
->=
+>>
 <=>
-|
-||
-^
-&
 []
 []=
-& coercion to_proc
+!=
+==
+===
+<
+>
+<=
+>=
+|
+^
+&
+
+Non-overloadable Operators
+||
+||=
+&&
+&&=
+and
+or
+not
+=
+~
+.
+..
+...
+::
+()
+{}
 ```
 
 ## Other hooks
