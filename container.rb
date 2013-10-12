@@ -13,4 +13,8 @@ class Container
       eos
     end
   end
+
+  def respond_to_missing?(method_name, include_private = false)
+    method_name == :shipit ? true : false
+  end
 end
