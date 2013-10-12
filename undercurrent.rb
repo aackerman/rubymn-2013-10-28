@@ -9,7 +9,6 @@ class Undercurrent
     true
   end
 
-
 end
 
 module MethodsModule
