@@ -1,4 +1,4 @@
-# Builtin Ruby Hooks
+# Ruby Undercurrent
 
 ## Method-related hooks
 
@@ -76,8 +76,9 @@ Overloadable Operators
 ~
 
 Already Overloaded Operators
-* - rest and spread on sets
-& - to_proc
+*  - rest and spread on sets
+&  - to_proc
+<< - append to array or string
 
 Non-overloadable Operators
 ||
@@ -99,13 +100,16 @@ not
 
 ## Other hooks
 ```
-Kernel.trace_var
+trace_var
 at_exit
 BEGIN
 END
 ObjectSpace.define_finalizer
 Signal.trap
+rescue
+ensure
+throw
+catch
 ```
 
-
-ActiveSupport::Concern and Module#included
+Discuss `ActiveSupport::Concern` and `Module#included`
