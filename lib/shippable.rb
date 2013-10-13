@@ -3,12 +3,28 @@ module Shippable
     puts "#{method_name} is now available!"
   end
 
-  def self.method_removed(fn)
-    puts "#{fn} method removed from #{name}"
+  def self.method_removed(method_name)
+    puts "#{method_name} method removed from #{name}"
   end
 
-  def self.method_undefined(fn)
-    puts "#{fn} method undefined in #{name}"
+  def self.method_undefined(method_name)
+    puts "#{method_name} method undefined in #{name}"
+  end
+
+  def self.singleton_method_added(method_name)
+    puts "#{method_name} added as a singleton method"
+  end
+
+  def self.singleton_method_removed(method_name)
+    puts "#{method_name} removed from #{self.name}"
+  end
+
+  def self.singleton_method_undefined(method_name)
+    puts "#{method_name} undefined from #{self.name}"
+  end
+
+  def self.ship!
+    puts 'shipped!'
   end
 
   def pack
@@ -18,4 +34,15 @@ module Shippable
   def label
     puts 'labeled!'
   end
+
+  def destroy
+    puts 'destroyed!'
+  end
+
+  def float
+    puts 'floating'
+  end
+
+  remove_method :destroy
+  undef_method :float
 end
