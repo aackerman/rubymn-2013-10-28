@@ -1,4 +1,6 @@
 class Container
+  include Shippable
+
   def method_missing(method_name)
     if method_name == :shipit
       print <<-eos
