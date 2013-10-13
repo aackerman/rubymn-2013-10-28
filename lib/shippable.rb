@@ -12,15 +12,15 @@ module Shippable
   end
 
   def self.singleton_method_added(method_name)
-    puts "#{method_name} added as a singleton method"
+    puts "#{method_name} added to #{self.name} as a singleton method"
   end
 
   def self.singleton_method_removed(method_name)
-    puts "#{method_name} removed from #{self.name}"
+    puts "#{method_name} removed from #{self.name} as a singleton method"
   end
 
   def self.singleton_method_undefined(method_name)
-    puts "#{method_name} undefined from #{self.name}"
+    puts "#{method_name} undefined from #{self.name} as a singleton method"
   end
 
   def self.ship!
