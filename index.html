@@ -152,7 +152,7 @@ class Container
 end
 
 class << Container
-  remove_method :shipit!
+  remove_method :shipit! # => shipit! was removed
 end
 </code></pre>
 				</section>
@@ -169,18 +169,22 @@ class Container
 end
 
 class << Container
-  undef_method :shipit!
+  undef_method :shipit! # => shipit! was undefined
 end
 </code></pre>
 				</section>
 
 				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the background.
-					</p>
+<code>inherited</code>
+<pre><code data-trim class="ruby">
+class Container
+  def self.inherited(subclass)
+    puts "#{subclass} is now inheriting from #{self.name}"
+  end
+end
+
+class Box < Container; end # => Box is now inheriting from Container
+</code></pre>
 				</section>
 
 				<section data-state="customevent">
