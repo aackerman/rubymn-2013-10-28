@@ -44,6 +44,11 @@
 				</section>
 
 				<section>
+					<h2>Be careful</h2>
+					<img src="images/bullet-in-foot.jpg">
+				</section>
+
+				<section>
 					<h2>Method Hooks</h2>
 				</section>
 
@@ -108,8 +113,18 @@ end
 				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
-					<pre><code data-trim class="ruby"></code></pre>
+					<code>method_undefined</code>
+					<pre><code data-trim class="ruby">
+class Container
+  def self.method_undefined(method_name)
+    puts "#{method_name} was undefined"
+  end
+
+  def shipit!; end
+
+  undef_method :shipit! # => shipit! was undefined
+end
+</code></pre>
 				</section>
 
 				<section data-markdown>
