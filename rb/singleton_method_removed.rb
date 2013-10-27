@@ -4,6 +4,8 @@ module Shippable
   end
 
   def self.shipit!; end
+end
 
+class << Shippable
   remove_method :shipit!
 end
