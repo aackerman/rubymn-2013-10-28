@@ -127,57 +127,51 @@ end
 </code></pre>
 				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
+				<section>
+					<code>singleton_method_added</code>
+					<pre><code data-trim class="ruby">
+class Container
+  def self.singleton_method_added(method_name)
+    puts "#{method_name} was added"
+  end # => singleton_method_added was added
 
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
+  def self.shipit!; end # => shipit! was added
+end
+</code></pre>
 				</section>
 
 				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
+					<code>singleton_method_removed</code>
+<pre><code data-trim class="ruby">
+class Container
+  def self.singleton_method_removed(method_name)
+    puts "#{method_name} was removed"
+  end
+
+  def self.shipit!; end
+end
+
+class << Container
+  remove_method :shipit!
+end
+</code></pre>
 				</section>
 
 				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?#/themes">Default</a> -
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> <br>
-						<a href="?theme=moon.css#/themes">Moon</a> -
-						<a href="?theme=simple.css#/themes">Simple</a> -
-						<a href="?theme=solarized.css#/themes">Solarized</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
+					<code>singleton_method_undefined</code>
+<pre><code data-trim class="ruby">
+class Container
+  def self.singleton_method_undefined(method_name)
+    puts "#{method_name} was undefined"
+  end
+
+  def self.shipit!; end
+end
+
+class << Container
+  undef_method :shipit!
+end
+</code></pre>
 				</section>
 
 				<section>
