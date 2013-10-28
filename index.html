@@ -233,6 +233,22 @@ end
 
 
         <section>
+          <h2>What do we have so far</h2>
+          <ul>
+            <li><code>method_missing</code>
+            <li><code>respond_to_missing?</code>
+            <li><code>method_added</code>
+            <li><code>method_removed</code>
+            <li><code>method_undefined</code>
+            <li><code>singleton_method_added</code>
+            <li><code>singleton_method_removed</code>
+            <li><code>singleton_method_undefined</code>
+          </ul>
+        </section>
+
+
+
+        <section>
           <h2>Class and Module Hooks</h2>
         </section>
 
@@ -268,6 +284,14 @@ end
 Container.new.shipit! # => SHIPIT!
             </code></pre>
           </section>
+
+
+          <section>
+            <h2>include vs. extend</h2>
+            <span><code>include</code> is for adding instance methods<br><code>extend</code> is for adding class methods</span>
+          </section>
+
+
           <section>
             <code>append_features</code>
             <pre><code data-trim class="ruby">
@@ -286,7 +310,6 @@ class Container
   include Shippable # => The features of Shippable were appended to Container
 end
             </code></pre>
-            <span>Please don't ever override <code>append_features</code></span>
           </section>
           <section>
             <code>included</code>
@@ -343,7 +366,7 @@ end
 
 
           <section>
-            <span>include</span>
+            <code>include</code>
             <pre><code data-trim class="ruby">
 module Shippable
   def shipit!
@@ -367,7 +390,8 @@ Container.new.shipit! # => SHIPIT!
 
 
           <section>
-            <span>prepend</span>
+            <code>prepend</code>
+            <pre><code data-trim class="ruby">
 module Shippable
   def shipit!
     puts 'shipit!'
@@ -384,8 +408,93 @@ end
 
 Container.new.shipit! # => shipit!
                       # => SHIPIT!
+            </code></pre>
           </section>
 
+          <section>
+            <code>prepend_features</code>
+            <pre><code data-trim class="ruby">
+module Shippable
+  def self.prepend_features(other)
+    puts "The features of #{self} were prepend to #{other}"
+    super
+  end
+
+  def shipit!
+    puts 'SHIPIT!'
+  end
+end
+
+class Container
+  prepend Shippable # => Features of Shippable were prepended to Container
+end
+            </code></pre>
+          </section>
+
+        </section>
+
+        <section>
+
+
+          <section>
+            <h2>intro to extend</h2>
+            <pre><code data-trim class="ruby">
+module Shippable
+  def shipit!
+    puts 'SHIPIT!'
+  end
+end
+
+class Container
+  extend Shippable
+end
+
+Container.shipit! # => SHIPIT!
+            </code></pre>
+
+          </section>
+
+          <section>
+            <code>extended</code>
+            <pre><code data-trim class="ruby">
+module Shippable
+  def self.extended(other)
+    puts "#{other} was extended with #{self}"
+    super
+  end
+
+  def shipit!
+    puts 'SHIPIT!'
+  end
+end
+
+class Container
+  extend Shippable # => Container was extended with Shippable
+end
+            </code></pre>
+          </section>
+
+
+          <section>
+            <code>extend_object</code>
+            <pre><code data-trim class="ruby">
+module Shippable
+  def self.extend_object(other)
+    puts "#{other} was extended with #{self}"
+    super
+  end
+
+  def shipit!
+    puts 'SHIPIT!'
+  end
+end
+
+class Container
+  extend Shippable # => Container was extended with Shippable
+end
+            </code></pre>
+            <span>Similar to append_features, and prepend_features<br> but, works with extend</span>
+          </section>
         </section>
 
         <section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
