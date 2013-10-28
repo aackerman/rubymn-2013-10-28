@@ -535,6 +535,24 @@ b.width # => 2
           </section>
         </section>
 
+        <section>
+          <code>const_missing</code>
+          <pre><code data-trim class="ruby">
+class Container
+  def initialize
+    SHIPIT
+  end
+
+  def self.const_missing(con)
+    puts "#{con} was missing"
+  end
+end
+
+Container.new # => SHIPIT was missing
+            </code></pre>
+            <span>Similar to <code>method_missing</code> but for constants</span>
+        </section>
+
         <section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
           <h2>Background Transitions</h2>
           <p>
