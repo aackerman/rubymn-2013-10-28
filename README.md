@@ -17,10 +17,11 @@ singleton_method_undefined
 
 ```
 inherited
-prepended
-prepend_features
 included
 append_features
+
+prepended
+prepend_features
 extend_object
 extended
 initialize

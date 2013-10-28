@@ -39,27 +39,38 @@
           <h1>Ruby hooks<br>and callbacks</h1>
         </section>
 
+
+
         <section>
           <h2>When you call this, Ruby calls that</h2>
         </section>
+
+
 
         <section>
           <h2>Be careful</h2>
           <img src="images/bullet-in-foot.jpg">
         </section>
 
+
+
         <section>
           <h2>Method Hooks</h2>
         </section>
 
+
+
         <section>
+
           <section>
             <code>method_missing</code>
             <p>Handle calls to methods that do not already exist</p>
           </section>
+
+
           <section>
             <code>method_missing</code>
-<pre><code data-trim class="ruby">
+            <pre><code data-trim class="ruby">
 class Container
   def package!
     puts 'Packaged'
@@ -74,23 +85,25 @@ end
 box = Container.new
 box.package! # => Packaged
 box.shipit! # => SHIPIT!
-</code></pre>
+            </code></pre>
           </section>
+
+
+          <section>
+            <h2>Practical uses</h2>
+            <code>activerecord-deprecated_finders</code>
+            <pre><code data-trim class="ruby">
+User.find_by_email(email) # Rails 3 deprecated finders available by default
+            </code></pre>
+            <span> vs </span>
+            <pre><code data-trim class="ruby">
+User.find_by(:email, email) # Rails 4 without deprecated finders
+            </code></pre>
+          </section>
+
         </section>
 
-        <section>
-          <h2>Practical uses of</h2>
-          <code>method_missing</code>
-          <br><br>
-          <code>activerecord-deprecated_finders</code>
-<pre><code data-trim class="ruby">
-User.find_by_email(email) # Rails 3 deprecated finders available by default
-</code></pre>
-<span> vs </span>
-<pre><code data-trim class="ruby">
-User.find_by(:email, email) # Rails 4 without deprecated finders
-</code></pre>
-        </section>
+
 
         <section>
           <code>respond_to_missing?</code>
@@ -111,12 +124,15 @@ end
 
 Container.new.respond_to? :shipit! # => true
 Container.new.method :shipit! # => &lt;Method: Container#shipit!&gt;
-</code></pre>
+          </code></pre>
+          <span>You should define <code>respond_to_missing?</code><br>if you define <code>method_missing</code></span>
         </section>
+
+
 
         <section>
           <code>method_added</code>
-<pre><code data-trim class="ruby">
+          <pre><code data-trim class="ruby">
 class Container
   def self.method_added(method_name)
     puts "#{method_name} is now available!"
@@ -124,12 +140,14 @@ class Container
 
   def shipit!; end # => shipit! is now available!
 end
-</code></pre>
+          </code></pre>
         </section>
+
+
 
         <section>
           <code>method_removed</code>
-<pre><code data-trim class="ruby">
+          <pre><code data-trim class="ruby">
 class Container
   def self.method_removed(method_name)
     puts "#{method_name} was removed"
@@ -139,8 +157,10 @@ class Container
 
   remove_method :shipit! # => shipit! was removed
 end
-</code></pre>
+          </code></pre>
         </section>
+
+
 
         <section>
           <code>method_undefined</code>
@@ -154,8 +174,10 @@ class Container
 
   undef_method :shipit! # => shipit! was undefined
 end
-</code></pre>
+          </code></pre>
         </section>
+
+
 
         <section>
           <code>singleton_method_added</code>
@@ -167,12 +189,14 @@ class Container
 
   def self.shipit!; end # => shipit! was added
 end
-</code></pre>
+          </code></pre>
         </section>
+
+
 
         <section id="transitions">
           <code>singleton_method_removed</code>
-<pre><code data-trim class="ruby">
+          <pre><code data-trim class="ruby">
 class Container
   def self.singleton_method_removed(method_name)
     puts "#{method_name} was removed"
@@ -184,12 +208,14 @@ end
 class << Container
   remove_method :shipit! # => shipit! was removed
 end
-</code></pre>
+          </code></pre>
         </section>
 
-        <section id="themes">
+
+
+        <section>
           <code>singleton_method_undefined</code>
-<pre><code data-trim class="ruby">
+          <pre><code data-trim class="ruby">
 class Container
   def self.singleton_method_undefined(method_name)
     puts "#{method_name} was undefined"
@@ -201,16 +227,20 @@ end
 class << Container
   undef_method :shipit! # => shipit! was undefined
 end
-</code></pre>
+          </code></pre>
         </section>
+
+
 
         <section>
           <h2>Class and Module Hooks</h2>
         </section>
 
+
+
         <section>
-<code>inherited</code>
-<pre><code data-trim class="ruby">
+          <code>inherited</code>
+          <pre><code data-trim class="ruby">
 class Container
   def self.inherited(subclass)
     puts "#{subclass} is now inheriting from #{self.name}"
@@ -218,23 +248,7 @@ class Container
 end
 
 class Box < Container; end # => Box is now inheriting from Container
-</code></pre>
-        </section>
-
-        <section>
-<code>append_features</code>
-<pre><code data-trim class="ruby">
-module Shippable
-  def self.append_features(other)
-    puts "The features of #{self} were appended to #{other}"
-  end
-end
-
-class Container
-  include Shippable # => The features of Shippable were appended to Container
-end
-</code></pre>
-<span><code>included</code> is prefered</span>
+          </code></pre>
         </section>
 
         <section>
@@ -252,11 +266,31 @@ class Container
 end
 
 Container.new.shipit! # => SHIPIT!
-</code></pre>
+            </code></pre>
           </section>
           <section>
-<code>included</code>
-<pre><code data-trim class="ruby">
+            <code>append_features</code>
+            <pre><code data-trim class="ruby">
+module Shippable
+  def self.append_features(other)
+    puts "The features of #{self} were appended to #{other}"
+    super
+  end
+
+  def shipit!
+    puts 'SHIPIT!'
+  end
+end
+
+class Container
+  include Shippable # => The features of Shippable were appended to Container
+end
+            </code></pre>
+            <span>Please don't ever override <code>append_features</code></span>
+          </section>
+          <section>
+            <code>included</code>
+            <pre><code data-trim class="ruby">
 module Shippable
   def self.included(other)
     puts "#{other} included the features of #{self}"
@@ -266,12 +300,11 @@ end
 class Container
   include Shippable # => Container included the features of Shippable
 end
-</code></pre>
+            </code></pre>
           </section>
-
           <section>
             <h2>Practical uses</h2>
-<pre><code data-trim class="ruby">
+            <pre><code data-trim class="ruby">
 class HardWorker
   include Sidekiq::Worker
 
@@ -279,9 +312,9 @@ class HardWorker
     puts "Work!"
   end
 end
-</code></pre>
-<span>Behind the scenes</span>
-<pre><code data-trim class="ruby">
+            </code></pre>
+            <span>Behind the scenes</span>
+            <pre><code data-trim class="ruby">
 module Sidekiq
   module Worker
     def self.included(base)
@@ -297,10 +330,63 @@ module Sidekiq
     end
   end
 end
-</code></pre>
+            </code></pre>
           </section>
         </section>
 
+
+
+        <section>
+          <section>
+            <h2>include vs. prepend</h2>
+          </section>
+
+
+          <section>
+            <span>include</span>
+            <pre><code data-trim class="ruby">
+module Shippable
+  def shipit!
+    puts 'shipit!'
+  end
+end
+
+class Container
+  include Shippable
+  def shipit!
+    puts 'SHIPIT!'
+    super
+  end
+end
+
+Container.new.shipit! # => SHIPIT!
+                      # => shipit!
+            </code></pre>
+          </section>
+
+
+
+          <section>
+            <span>prepend</span>
+module Shippable
+  def shipit!
+    puts 'shipit!'
+    super
+  end
+end
+
+class Container
+  prepend Shippable
+  def shipit!
+    puts 'SHIPIT!'
+  end
+end
+
+Container.new.shipit! # => shipit!
+                      # => SHIPIT!
+          </section>
+
+        </section>
 
         <section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
           <h2>Background Transitions</h2>
