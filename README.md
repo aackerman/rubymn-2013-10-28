@@ -25,7 +25,6 @@ extend_object
 extended
 initialize
 initialize_copy
-
 const_missing
 ```
 
@@ -40,7 +39,6 @@ marshal_load
 
 ```
 coerce
-induced_from
 to_xxx
 
 Overloadable Operators
@@ -103,8 +101,6 @@ not
 ```
 trace_var
 at_exit
-BEGIN
-END
 ObjectSpace.define_finalizer
 Signal.trap
 rescue
