@@ -23,6 +23,7 @@ prepended
 prepend_features
 extend_object
 extended
+
 initialize
 initialize_copy
 const_missing

@@ -497,6 +497,44 @@ end
           </section>
         </section>
 
+
+
+        <section>
+          <section>
+            <code>initialize</code>
+            <pre><code data-trim class="ruby">
+class Container
+  def initialize
+    puts 'Ready to Shipit!'
+  end
+end
+
+Container.new # => Ready to Shipit!
+            </code></pre>
+          </section>
+          <section>
+            <code>initialize_copy</code>
+            <pre><code data-trim class="ruby">
+class Container
+  attr_accessor :width
+
+  def initialize
+    @width = 4
+  end
+
+  def initialize_copy(other)
+    other.width = 2
+  end
+end
+
+a = Container.new
+a.width # => 4
+b = a.dup
+b.width # => 2
+            </code></pre>
+          </section>
+        </section>
+
         <section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
           <h2>Background Transitions</h2>
           <p>
