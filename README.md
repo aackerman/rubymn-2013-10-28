@@ -19,8 +19,8 @@ singleton_method_undefined
 inherited
 prepended
 prepend_features
-append_features
 included
+append_features
 extend_object
 extended
 initialize
