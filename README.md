@@ -110,4 +110,3 @@ catch
 ```
 
 Discuss `ActiveSupport::Concern` and `Module#included`
-All commits should be added to gh-pages branch
